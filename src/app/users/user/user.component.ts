@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -7,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
   user: {id: number, name: string};
-
-  constructor() { }
+//ActivatedRoute object we injected will give us access to the id passed in the url => selectedUser
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.user = {
+      id: this.route.snapshot.params['id'], //all the params will be retrievable off the route
+      name:  this.route.snapshot.params['name']
+    }
   }
 
 }
