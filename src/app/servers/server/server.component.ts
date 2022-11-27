@@ -30,5 +30,5 @@ export class ServerComponent implements OnInit {
     //No need to use this as we are already on this path
     this.router.navigate(['edit'], {relativeTo: this.route, queryParamsHandling: 'preserve'})//can use 'merge when merging new peoperties with old
   }
-
+//when making a routing throuh html <a routerLink="..." queryParamsHandling="merge"> can be used
 }
