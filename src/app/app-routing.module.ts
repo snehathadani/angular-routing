@@ -8,6 +8,7 @@ import { ServerComponent } from './servers/server/server.component';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from "./auth-guard.service";
+import { CanDeactivateGuard } from "./servers/edit-server/can-deactivate-guard.service";
 const appRoutes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'users', component: UsersComponent, children: [
@@ -20,7 +21,7 @@ const appRoutes: Routes = [
      component: ServersComponent,
       children: [
       {path: ':id', component:ServerComponent},
-      {path: ':id/edit', component: EditServerComponent}
+      {path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard]}//angular will run this guard everytime a user will try and navigate away
     ] },
     {path:'not-found', component: PageNotFoundComponent},
     {path:'**', redirectTo: '/not-found'}//make sure this is last. If in the beginning you will be always getting redirected
