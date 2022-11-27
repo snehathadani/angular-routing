@@ -14,7 +14,11 @@ const appRoutes: Routes = [
       {path: ':id/:name', component: UserComponent}
     ]},
    
-    {path: 'servers', canActivate:[AuthGuard], component: ServersComponent, children: [
+    {path: 'servers', 
+    // canActivate:[AuthGuard],//you can't go to servers tab
+    canActivateChild: [AuthGuard],// protect a single route or all child routes with this you can go to servers but not to single servers
+     component: ServersComponent,
+      children: [
       {path: ':id', component:ServerComponent},
       {path: ':id/edit', component: EditServerComponent}
     ] },
