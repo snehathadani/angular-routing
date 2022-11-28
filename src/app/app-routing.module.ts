@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AuthGuard } from "./auth-guard.service";
 import { CanDeactivateGuard } from "./servers/edit-server/can-deactivate-guard.service";
 import { ErrorPageComponent } from "./error-page/error-page.component";
+import { Serverresolver } from "./servers/server/server-resolver.service";
 const appRoutes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'users', component: UsersComponent, children: [
@@ -21,7 +22,7 @@ const appRoutes: Routes = [
     canActivateChild: [AuthGuard],// protect a single route or all child routes with this you can go to servers but not to single servers
      component: ServersComponent,
       children: [
-      {path: ':id', component:ServerComponent},
+      {path: ':id', component:ServerComponent, resolve: {server: Serverresolver}},//key value pairs of the resolver we want to use
       {path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard]}//angular will run this guard everytime a user will try and navigate away
     ] },
     // {path:'not-found', component: PageNotFoundComponent},
